@@ -1,0 +1,95 @@
+﻿@model HospitalManagement.Models.CurrentBedModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+<div>
+    @Html.ActionLink("ViewRecords", "ViewBeds")
+</div>
+@using (Html.BeginForm("Create", "Beds", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+<div class="form-horizontal">
+    <h4>Add Current Bed</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+    
+    <div class="form-group">
+
+        <div class="col-md-12">
+            <label class="form-check-label" for="exampleCheck1">Select Hospital Type:</label>
+            @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.CatagoryList, "CategoryId", "CategoryName", Model.CategoryId))
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+
+            <label class="form-check-label" for="exampleCheck1">Select Hospital Name:</label>
+            @Html.DropDownListFor(model => model.SubCategoryId, new SelectList(ViewBag.SubCatagoryList, "SubCategoryId", "HospitalName", Model.SubCategoryId))
+            @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+
+            <label class="form-check-label" for="exampleCheck1">Select Bed Type:</label>
+            @Html.DropDownListFor(model => model.BedTypeId, new SelectList(ViewBag.BedTypeList, "BedTypeId", "BedType", Model.SubCategoryId))
+            @Html.ValidationMessageFor(model => model.BedTypeId, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+          
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-10">
+         
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Count, htmlAttributes: new { @class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Count, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Count, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Opex, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Opex, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Opex, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+        <label>@ViewBag.Message</label>
+    </div>
+</div>
+
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ViewBeds")
+</div>
